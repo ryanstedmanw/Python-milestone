@@ -8,15 +8,16 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    headers = {"apikey": "aefd1dc0-4edb-11eb-8062-dbb6898f3f94"}
-    params = (("url","https://aliexpress.com/item/4001272494924.html"),("amount","1"),);
-    response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params);
-    return jsonify(response.text('text'))
+    return render_template("index.html")
     
 
 @app.route("/products")
 def products():
-    return render_template("products.html")
+    headers = {"apikey": "aefd1dc0-4edb-11eb-8062-dbb6898f3f94"}
+    params = (("url","https://www.aliexpress.com/item/4001242932228.html"),("amount","1"),)
+    response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
+
+    return render_template("products.html", test=response.text)
     
 
 @app.route("/about")
@@ -28,7 +29,6 @@ def about():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
-
 
 
 if __name__ == "__main__":
