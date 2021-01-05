@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 from flask import Flask, render_template, jsonify
 
@@ -14,9 +15,8 @@ def index():
 @app.route("/products")
 def products():
     headers = {"apikey": "aefd1dc0-4edb-11eb-8062-dbb6898f3f94"}
-    params = (("url","https://www.aliexpress.com/item/4001242932228.html"),("amount","1"),)
+    params = (("url","https://www.capterra.com/p/140650/Recruitee/reviews"),("amount","1"),)
     response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
-
     return render_template("products.html", test=response.text)
     
 
