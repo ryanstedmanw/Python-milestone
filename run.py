@@ -15,9 +15,11 @@ def index():
 @app.route("/products")
 def products():
     headers = {"apikey": "aefd1dc0-4edb-11eb-8062-dbb6898f3f94"}
-    params = (("url","https://www.capterra.com/p/140650/Recruitee/reviews"),("amount","1"),)
+    params = (("url","https://www.capterra.com/p/140650/Recruitee/reviews"),("amount","1"))
     response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
-    return render_template("products.html", test=response.text)
+    data = response.json()
+    test = (data['reviews'][0]['platform_specific']['cons'])
+    return render_template("products.html", test=test)
     
 
 @app.route("/about")
