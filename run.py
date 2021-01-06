@@ -1,6 +1,9 @@
 import os
 import json
 import requests
+import docx
+import pandas as pd
+import numpy as np
 from flask import Flask, render_template, jsonify
 
 
@@ -21,6 +24,18 @@ def products():
     test = (data['reviews'][0]['platform_specific']['cons'])
     return render_template("products.html", test=test)
     
+@app.route("/test")
+def test():
+    doc = docx.Document("static/YuBambu.docx")
+    df = pd.DataFrame()
+    tables = doc.tables[0]
+##Getting the original data from the document to a list
+    ls =[]
+    for row in tables.rows:
+        for cell in row.cells:
+            for paragraph in cell.paragraphs:
+                ls.append(paragraph.text)
+    return render_template("test.html", text=ls)
 
 @app.route("/about")
 def about():
