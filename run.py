@@ -21,7 +21,7 @@ def products():
     params = (("url","https://www.capterra.com/p/140650/Recruitee/reviews"),("amount","1"))
     response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
     data = response.json()
-    test = (data['reviews'][0]['platform_specific']['cons'])
+    test = (data)
     return render_template("products.html", test=test)
     
 @app.route("/test")
@@ -35,7 +35,16 @@ def test():
         for cell in row.cells:
             for paragraph in cell.paragraphs:
                 ls.append(paragraph.text)
-    return render_template("test.html", text=ls)
+    product_dict =	{
+        "Product Name": "",
+        "Product Price": "",
+        "Manufacturer Price": "",
+        "Shipping Price": "",
+        "Shipping Times": "",
+        "Category ": "",
+    }
+    
+    return render_template("test.html", text=product_dict('Product Name'))
 
 @app.route("/about")
 def about():
