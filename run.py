@@ -36,15 +36,17 @@ def test():
             for paragraph in cell.paragraphs:
                 ls.append(paragraph.text)
     product_dict =	{
-        "Product Name": "",
-        "Product Price": "",
-        "Manufacturer Price": "",
-        "Shipping Price": "",
-        "Shipping Times": "",
-        "Category ": "",
+        "Product Name": ["Bamboo Cotton Swabs","Bamboo Toothbrus","Bamboo Coaste"],
+        "Product Price": [2.99,1.99,4.99],
+        "Manufacturer Price": ['￡1.85','￡0.48','￡1.67'],
+        "Shipping Price": ['£1.84','￡1.88','￡2.60'],
+        "Shipping Times": ['2-4 Weeks Ali Standard Shipping / Tracked','2-4 Weeks Ali Standard Shipping / Tracked','2-4 Weeks Ali Standard Shipping / Tracked'],
+        "Category": ["Toiletries","Toiletries","Kitchenware"],
     }
     
-    return render_template("test.html", text=product_dict('Product Name'))
+    
+    
+    return render_template("test.html", product_dict=product_dict, test=ls)
 
 @app.route("/about")
 def about():
