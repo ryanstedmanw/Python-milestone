@@ -37,6 +37,7 @@ def test():
                 ls.append(paragraph.text)
     product_dict =	{
         "Product Name": ["Bamboo Cotton Swabs","Bamboo Toothbrus","Bamboo Coaste"],
+        "Product URL": [],
         "Product Price": [2.99,1.99,4.99],
         "Manufacturer Price": ['￡1.85','￡0.48','￡1.67'],
         "Shipping Price": ['£1.84','￡1.88','￡2.60'],
