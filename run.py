@@ -31,14 +31,16 @@ def test():
     tables = doc.tables[0]
 ##Getting the original data from the document to a list
     ls =[]
+    product_amount = 0
     for row in tables.rows:
+        product_amount = product_amount + 1
         for cell in row.cells:
             for paragraph in cell.paragraphs:
                 ls.append(paragraph.text)
     
 
     ls = list(filter(None, ls)) ##this removes the empty strings from the list
-
+    ls = ls[7:]
 
     product_dict =	{
         "Product Name": [],
@@ -52,40 +54,33 @@ def test():
     
     counter = 0
     for i in range(len(ls)):
-        counter = counter +1
+        if counter == 0:
+            product_dict["Product Name"].append(ls[i])
     
-        if i > 7:
-            if counter == 0:
-                product_dict["Product Name"].append(ls[i])
+        if counter == 1:
+            product_dict["Product URL"].append(ls[i])
     
-            if counter == 1:
-                product_dict["Product URL"].append(ls[i])
+        if counter == 2:
+            product_dict["Product Price"].append(ls[i])
     
-            if counter == 2:
-                product_dict["Product Price"].append(ls[i])
-        
-            if counter == 3:
-                product_dict["Manufacturer Price"].append(ls[i])
-        
-            if counter == 4:
-                product_dict["Shipping Price"].append(ls[i])
-        
-            if counter == 5:
-                product_dict["Shipping Times"].append(ls[i])
-        
-            if counter == 6:
-                product_dict["Shipping Times"].append(ls[i])
-        
-            if counter == 7:
-                product_dict["Category"].append(ls[i])
+        if counter == 3:
+            product_dict["Manufacturer Price"].append(ls[i])
     
-
-        if counter == 7:
+        if counter == 4:
+            product_dict["Shipping Price"].append(ls[i])
+    
+        if counter == 5:
+            product_dict["Shipping Times"].append(ls[i])
+        
+        if counter == 7 :
+            product_dict["Category"].append(ls[i])
             counter = -1
 
+        counter = counter + 1
+
     
 
-    return render_template("test.html", product_dict=product_dict, test=ls, )
+    return render_template("test.html", product_dict=product_dict, test=ls, product_amount=product_amount)
 
 @app.route("/about")
 def about():
