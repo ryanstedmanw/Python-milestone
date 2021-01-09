@@ -5,6 +5,9 @@ import docx
 import pandas as pd
 import numpy as np
 from flask import Flask, render_template, jsonify
+import urllib.request
+import bs4
+from bs4 import BeautifulSoup
 
 
 app = Flask(__name__)
@@ -79,19 +82,41 @@ def test():
         counter = counter + 1
 
     ## section above appends the value of the list to the corresponding key value in the dict
-    substring=[]
-    for i in range(6):
-        a_string = product_dict["Product URL"][i]
-        split_string = a_string.split("?", 1)
-        substring.append(split_string[0])
+    url_substring=[]
+    for i in range(product_amount - 1):
+        url_string = product_dict["Product URL"][i]
+        url_split_string = url_string.split("?", 1)
+        url_substring.append(url_split_string[0])
 
     product_dict["Product URL"] = []
 
-    for i in range(6):
-        product_dict["Product URL"].append(substring[i])
+    for i in range(product_amount - 1):
+        product_dict["Product URL"].append(url_substring[i])
  
     ## section above cleans the url from the folder by creating a substring list of strings, then the product dict is cleared, then updated
-    return render_template("test.html", product_dict=product_dict, test=ls, product_amount=product_amount)
+    
+    final_img_src_list = []
+    
+    for i in range(product_amount - 1):
+        grab_url_html = urllib.request.urlopen(product_dict["Product URL"][i]) ## grabs the url html code and stores the variable
+        grabbed_url_html = grab_url_html.read()
+        decode_grabbed_url_html = grabbed_url_html.decode("utf8")              ## decodes the data into url
+        grab_url_html.close()
+
+        ##  section above grabs the url html code from the link provided in the product_dict url key
+        html = decode_grabbed_url_html
+        soup = BeautifulSoup(html, "lxml")
+        img_url_first_script = soup.find('script')
+    
+        soup_string = str(img_url_first_script)
+        split = soup_string.split("https://", 1)
+        converted = "https://" + split[1]
+        converted_split = converted.split(".jpg", 1)
+        final_img_src = converted_split[0] + ".jpg"
+        final_img_src_list.append(final_img_src)
+ 
+
+    return render_template("test.html", product_dict=product_dict, test=ls, product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html)
 
 @app.route("/about")
 def about():
