@@ -20,14 +20,7 @@ def index():
 
 @app.route("/products")
 def products():
-    headers = {"apikey": "aefd1dc0-4edb-11eb-8062-dbb6898f3f94"}
-    params = (
-        ("url", "https://www.capterra.com/p/140650/Recruitee/reviews"), ("amount", "1"))
-    response = requests.get(
-        'https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
-    data = response.json()
-    test = (data)
-    return render_template("products.html", test=test)
+    return render_template("products.html")
 
 
 @app.route("/test")
@@ -121,7 +114,15 @@ def test():
         final_img_src_list.append(final_img_src)
         # this converts the BS4 element into a string, then chops the string into the useful images, then appends to list
 
-    return render_template("test.html", product_dict=product_dict, test=ls, product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html)
+        headers = {"apikey": "aefd1dc0-4edb-11eb-8062-dbb6898f3f94"}
+        params = (
+        ("url", "https://www.capterra.com/p/140650/Recruitee/reviews"), ("amount", "1"))
+        response = requests.get(
+        'https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
+        review_data_json = response.json()
+        review_data = review_data_json
+
+    return render_template("test.html", product_dict=product_dict, review_data=review_data, product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html)
 
 
 @app.route("/about")
