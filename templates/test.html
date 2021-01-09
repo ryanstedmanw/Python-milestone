@@ -3,6 +3,7 @@
 
 {% for i in range(product_amount - 1) %}
 <div class="row product_page">
+<div class="product_img"><img src="https://ae01.alicdn.com/kf/H9fca3a84989244e29d4787ab724387b3J/100-200pcs-Double-Head-Cotton-Swab-Bamboo-Cotton-Swabs-Wood-Sticks-Disposable-Buds-Cotton-for-Nose.jpg_Q90.jpg_.webp" alt=""></div>
 <p class="col">Product name:<br />{{ product_dict["Product Name"][i] }}</p>
 <p class="col">Product Price:<br /> {{ product_dict["Product Price"][i]}}</p>
 <p class="col">Manufacturer Price:<br />{{ product_dict["Manufacturer Price"][i] }}</p>
@@ -11,5 +12,5 @@
 <p class="col">Category:<br />{{ product_dict["Category"][i] }}</p>
 </div>
 {% endfor %}
-<p>{{ product_amount - 1 }}</p>
+<p>{{ product_dict["Product URL"][0] }}</p>
 {% endblock %}

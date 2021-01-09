@@ -33,7 +33,7 @@ def test():
     ls =[]
     product_amount = 0
     for row in tables.rows:
-        product_amount = product_amount + 1
+        product_amount = product_amount + 1 ## simply find the amount of product in the list 
         for cell in row.cells:
             for paragraph in cell.paragraphs:
                 ls.append(paragraph.text)
@@ -42,7 +42,7 @@ def test():
     ls = list(filter(None, ls)) ##this removes the empty strings from the list
     ls = ls[7:]
 
-    product_dict =	{
+    product_dict =	{           ## this is the dict that my data for the site is stored in 
         "Product Name": [],
         "Product URL": [],
         "Product Price": [],
@@ -78,8 +78,19 @@ def test():
 
         counter = counter + 1
 
-    
+    ## section above appends the value of the list to the corresponding key value in the dict
+    substring=[]
+    for i in range(6):
+        a_string = product_dict["Product URL"][i]
+        split_string = a_string.split("?", 1)
+        substring.append(split_string[0])
 
+    product_dict["Product URL"] = []
+
+    for i in range(6):
+        product_dict["Product URL"].append(substring[i])
+ 
+    ## section above cleans the url from the folder by creating a substring list of strings, then the product dict is cleared, then updated
     return render_template("test.html", product_dict=product_dict, test=ls, product_amount=product_amount)
 
 @app.route("/about")

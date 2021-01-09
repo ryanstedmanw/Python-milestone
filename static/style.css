@@ -12,7 +12,14 @@
   text-shadow:2px 2px #333;
 }
 
-
+.product_img img{
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+ 
+}
 .product_page {
     text-align: center;
     margin-top: 25px;
