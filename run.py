@@ -126,14 +126,8 @@ def products():
 
 @app.route("/test")
 def test():
-    headers = {"apikey": "59681810-5262-11eb-8245-47538fc8149a"}
-    params = (
-    ("url", "https://aliexpress.com/item/4001272494924.html"), ("amount", "1"))
-    response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
-    review_data_json = response.json()
-    review_data = review_data_json
-
-    return render_template("test.html", review_data=review_data)
+    
+    return render_template("test.html")
 
 
 @app.route("/about")
