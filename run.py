@@ -20,7 +20,7 @@ def index():
 
 @app.route("/products")
 def products():
-    doc = docx.Document("static/YuBambu.docx")
+    doc = docx.Document("static/YuBambu.docx") ## document with products information
     df = pd.DataFrame()
     tables = doc.tables[0]
 # Getting the original data from the document to a list
@@ -78,20 +78,18 @@ def products():
         url_string = product_dict["Product URL"][i]
         url_split_string = url_string.split("?", 1)
         url_substring.append(url_split_string[0])
+    ## section above splits the url into a useable url i.e remove the junk 
 
     product_dict["Product URL"] = []
-
     for i in range(product_amount - 1):
         product_dict["Product URL"].append(url_substring[i])
-
     # section above cleans the url from the folder by creating a substring list of strings, then the product dict is cleared, then updated
 
     final_img_src_list = []
-
     for i in range(product_amount - 1):
-        # grabs the url html code and stores the variable
         grab_url_html = urllib.request.urlopen(product_dict["Product URL"][i])
         grabbed_url_html = grab_url_html.read()
+        # above grabs the url html code from product dict url and stores the variable 
         decode_grabbed_url_html = grabbed_url_html.decode(
             "utf8")  # decodes the data into url
         grab_url_html.close()
@@ -117,9 +115,8 @@ def products():
         response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
         review_data_json = response.json()
         review_data = review_data_json
-        
         review_text_string.append(review_data['reviews'][0]['text'])
-        
+    ##section above grabs the product url from product dict and passed that data through the review api
             
 
     return render_template("products.html", product_dict=product_dict,  product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html, review_text_string=review_text_string)
