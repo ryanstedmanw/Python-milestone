@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% for i in range(3) %}
+{% for i in range(6) %}
 <div class="row product_page">
 <p class="col">Product name:<br />{{ product_dict["Product Name"][i] }}</p>
-<p class="col">Product Price:<br />£ {{ product_dict["Product Price"][i]}}</p>
+<p class="col">Product Price:<br /> {{ product_dict["Product Price"][i]}}</p>
 <p class="col">Manufacturer Price:<br />{{ product_dict["Manufacturer Price"][i] }}</p>
 <p class="col">Shipping Price:<br />{{ product_dict["Shipping Price"][i] }}</p>
 <p class="col">Shipping Times:<br />{{ product_dict["Shipping Times"][i] }}</p>
@@ -12,5 +12,5 @@
 
 </div>
 {% endfor %}
-<p>{{ test }}</p>
+
 {% endblock %}

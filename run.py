@@ -35,19 +35,57 @@ def test():
         for cell in row.cells:
             for paragraph in cell.paragraphs:
                 ls.append(paragraph.text)
+    
+
+    ls = list(filter(None, ls)) ##this removes the empty strings from the list
+
+
     product_dict =	{
-        "Product Name": ["Bamboo Cotton Swabs","Bamboo Toothbrus","Bamboo Coaste"],
+        "Product Name": [],
         "Product URL": [],
-        "Product Price": [2.99,1.99,4.99],
-        "Manufacturer Price": ['￡1.85','￡0.48','￡1.67'],
-        "Shipping Price": ['£1.84','￡1.88','￡2.60'],
-        "Shipping Times": ['2-4 Weeks Ali Standard Shipping / Tracked','2-4 Weeks Ali Standard Shipping / Tracked','2-4 Weeks Ali Standard Shipping / Tracked'],
-        "Category": ["Toiletries","Toiletries","Kitchenware"],
+        "Product Price": [],
+        "Manufacturer Price": [],
+        "Shipping Price": [],
+        "Shipping Times": [],
+        "Category": [],
     }
     
+    counter = 0
+    for i in range(len(ls)):
+        counter = counter +1
     
+        if i > 7:
+            if counter == 0:
+                product_dict["Product Name"].append(ls[i])
     
-    return render_template("test.html", product_dict=product_dict, test=ls)
+            if counter == 1:
+                product_dict["Product URL"].append(ls[i])
+    
+            if counter == 2:
+                product_dict["Product Price"].append(ls[i])
+        
+            if counter == 3:
+                product_dict["Manufacturer Price"].append(ls[i])
+        
+            if counter == 4:
+                product_dict["Shipping Price"].append(ls[i])
+        
+            if counter == 5:
+                product_dict["Shipping Times"].append(ls[i])
+        
+            if counter == 6:
+                product_dict["Shipping Times"].append(ls[i])
+        
+            if counter == 7:
+                product_dict["Category"].append(ls[i])
+    
+
+        if counter == 7:
+            counter = -1
+
+    
+
+    return render_template("test.html", product_dict=product_dict, test=ls, )
 
 @app.route("/about")
 def about():
