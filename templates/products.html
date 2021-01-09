@@ -1,8 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% for i in range(11) %}
-<p class="col-sm-5">{{ test }}</p>
+{% for i in range(product_amount - 1) %}
+<div class="row product_page">
+    <div class="product_img"><img src={{page[i]}}></div>
+    <p class="col product_info">Product name:<br />{{ product_dict["Product Name"][i] }}</p>
+    <p class="col product_info">Product Price:<br /> {{ product_dict["Product Price"][i]}}</p>
+    <p class="col product_info">Manufacturer Price:<br />{{ product_dict["Manufacturer Price"][i] }}</p>
+    <p class="col product_info">Shipping Price:<br />{{ product_dict["Shipping Price"][i] }}</p>
+    <p class="col product_info">Shipping Times:<br />{{ product_dict["Shipping Times"][i] }}</p>
+    <p class="col product_info">Category:<br />{{ product_dict["Category"][i] }}</p>
+    <p class="col product_info">Review:<br />{{ review_data }}</p>
+</div>
 {% endfor %}
+
+
 
 {% endblock %}

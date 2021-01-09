@@ -20,11 +20,6 @@ def index():
 
 @app.route("/products")
 def products():
-    return render_template("products.html")
-
-
-@app.route("/test")
-def test():
     doc = docx.Document("static/YuBambu.docx")
     df = pd.DataFrame()
     tables = doc.tables[0]
@@ -122,7 +117,7 @@ def test():
         review_data_json = response.json()
         review_data = review_data_json
 
-    return render_template("test.html", product_dict=product_dict, review_data=review_data, product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html)
+    return render_template("products.html", product_dict=product_dict, review_data=review_data, product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html)
 
 
 @app.route("/about")
