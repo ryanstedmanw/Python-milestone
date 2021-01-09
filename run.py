@@ -115,11 +115,16 @@ def products():
         response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
         review_data_json = response.json()
         review_data = review_data_json
-        review_text_string.append(review_data['reviews'][0]['text'])
+        #review_text_string.append(review_data['reviews'][0]['text'])
+        review_text_string = review_data # the code above is commented out as api calls reached limit so this line is added to stop crashing
     ##section above grabs the product url from product dict and passed that data through the review api
-            
+    
+    display_cards_rows = 0
+    display_cards_rows = (product_amount / 4)
+    x = 0
+    z = 4
 
-    return render_template("products.html", product_dict=product_dict,  product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html, review_text_string=review_text_string)
+    return render_template("products.html", x=x, z=z, display_cards_rows=int(display_cards_rows), product_dict=product_dict,  product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html, review_text_string=review_text_string)
 
 @app.route("/test")
 def test():
