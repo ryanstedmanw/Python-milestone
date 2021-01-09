@@ -109,15 +109,31 @@ def products():
         final_img_src_list.append(final_img_src)
         # this converts the BS4 element into a string, then chops the string into the useful images, then appends to list
 
-        headers = {"apikey": "aefd1dc0-4edb-11eb-8062-dbb6898f3f94"}
+    review_text_string = []
+    for i in range(product_amount -1):
+        headers = {"apikey": "59681810-5262-11eb-8245-47538fc8149a"}
         params = (
-        ("url", "https://www.capterra.com/p/140650/Recruitee/reviews"), ("amount", "1"))
-        response = requests.get(
-        'https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
+        ("url", product_dict["Product URL"][i]), ("amount", "1"))
+        response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
         review_data_json = response.json()
         review_data = review_data_json
+        
+        review_text_string.append(review_data['reviews'][0]['text'])
+        
+            
 
-    return render_template("products.html", product_dict=product_dict, review_data=review_data, product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html)
+    return render_template("products.html", product_dict=product_dict,  product_amount=product_amount, page=final_img_src_list, pagetest=decode_grabbed_url_html, review_text_string=review_text_string)
+
+@app.route("/test")
+def test():
+    headers = {"apikey": "59681810-5262-11eb-8245-47538fc8149a"}
+    params = (
+    ("url", "https://aliexpress.com/item/4001272494924.html"), ("amount", "1"))
+    response = requests.get('https://app.reviewapi.io/api/v1/reviews', headers=headers, params=params)
+    review_data_json = response.json()
+    review_data = review_data_json
+
+    return render_template("test.html", review_data=review_data)
 
 
 @app.route("/about")
