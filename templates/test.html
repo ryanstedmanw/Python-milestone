@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
-<p>{{ review_data['reviews'][0]['text'] }}</p>
+{% for i in range(20) %}
+{% if (i % 3) == 0 %}
+<div class="row">
+{% endif %}
+<p>hi</p>
+{% if (i % 3) == 0 %}
+</div>
+{% endif %}
+{% endfor %}
 
 {% endblock %}
