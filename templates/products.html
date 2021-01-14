@@ -1,8 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% for i in range(11) %}
-<p class="col-sm-5">{{ test }}</p>
+
+{% for i in range(display_cards_rows) %}
+<div class="container">
+    <div class="card-deck">
+
+{% for i in range(x ,(product_amount - z)) %}
+        <div class="card mb-4">
+            <div class="product_img"><img src={{page[i]}}></div>
+            <div class="card-body">
+                    <h5 class="card-title">{{ product_dict["Product Name"][i] }}</h5>
+                    <p class="card-text">Product Price: {{ product_dict["Product Price"][i]}}</p>
+                    <p class="card-text">Manufacturer Price: {{ product_dict["Manufacturer Price"][i] }}</p>
+                    <p class="card-text">Shipping Price: {{ product_dict["Shipping Price"][i] }}</p>
+                    <p class="card-text">Shipping Times: {{ product_dict["Shipping Times"][i] }}</p>
+                    <p class="card-text">Category: {{ product_dict["Category"][i] }}</p>
+                    <p class="card-text">Reviews: {{ review_text_string[i] }}</p>
+                    <p>{{ x , z }}</p>
+                    
+                    
+            </div>
+        </div>
+
 {% endfor %}
 
+</div>
+</div>
+{% endfor %}
 {% endblock %}
